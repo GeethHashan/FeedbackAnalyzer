@@ -15,6 +15,13 @@ public class Feedback {
 
     private Integer version;
 
+    // ✅ ADD THIS FIELD
+    @Column(length = 2000)
+    private String analysis;
+
+    // ✅ ADD THIS FIELD
+    private String sentiment;  // POSITIVE, NEGATIVE, NEUTRAL
+
 
 
     // ✅ Getters and Setters
@@ -26,4 +33,12 @@ public class Feedback {
 
     public Integer getVersion() { return version; }
     public void setVersion(Integer version) { this.version = version; }
+
+    public String getAnalysis() { return analysis; }
+    public void setAnalysis(String analysis) { this.analysis = analysis; }
+
+    public String getSentiment() { return sentiment; }
+    public void setSentiment(String sentiment) { this.sentiment = sentiment; }
+
+
 }

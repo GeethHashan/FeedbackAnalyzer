@@ -1,5 +1,6 @@
 package com.myanalyzer.feedbackanalyzer.user;
 
+import com.myanalyzer.feedbackanalyzer.service.LLMService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,9 @@ public class FeedbackController {
 
     @Autowired
     private FeedbackService service;
+
+    @Autowired
+    private LLMService llmService;
 
     @GetMapping("/AddFeedback")
     public String displayAddFeedback(Model model) {
@@ -30,6 +34,11 @@ public class FeedbackController {
     public String saveFeedback(@RequestParam("feedback") String feedbackText) {
         Feedback feedback = new Feedback();
         feedback.setFeedback(feedbackText);
+
+        String analysis = llmService.analyzeFeedback(feedbackText);
+        feedback.setAnalysis(analysis);
+        feedback.setSentiment(llmService.extractSentiment(analysis));
+
         service.save(feedback);
         return "redirect:/AddFeedback";
     }
@@ -50,6 +59,11 @@ public class FeedbackController {
         Feedback feedback = service.get(id);
         if (feedback != null) {
             feedback.setFeedback(feedbackText);
+
+            String analysis = llmService.analyzeFeedback(feedbackText);
+            feedback.setAnalysis(analysis);
+            feedback.setSentiment(llmService.extractSentiment(analysis));
+
             service.save(feedback);
         }
         return "redirect:/AddFeedback";
