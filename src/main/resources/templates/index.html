@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Feedback Analyzer</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<!-- Main Container -->
+<div class="container-fluid min-vh-100 d-flex flex-column justify-content-center align-items-center text-center">
+
+    <!-- Heading -->
+    <h1 class="display-4 mb-4">Welcome to Feedback Analyzer!</h1>
+
+    <!-- Add Feedback Button -->
+    <a class="btn btn-primary btn-lg" th:href="@{/AddFeedback}">Test Analyzer</a>
+
+</div>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
