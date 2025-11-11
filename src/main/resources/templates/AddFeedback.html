@@ -6,10 +6,6 @@
     <title>Feedback List | Feedback Analyzer</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .sentiment-badge {
-            font-size: 0.9rem;
-            padding: 0.4rem 0.8rem;
-        }
         .feedback-card {
             transition: transform 0.2s;
         }
@@ -21,9 +17,10 @@
 </head>
 <body class="bg-light">
 
+<!-- Navigation Bar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
     <div class="container-fluid">
-        <a class="navbar-brand fw-bold" th:href="@{/}">🤖 AI Feedback Analyzer</a>
+        <a class="navbar-brand fw-bold" th:href="@{/}">📋 Feedback Analyzer</a>
     </div>
 </nav>
 
@@ -31,9 +28,12 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h1 class="fw-bold text-primary mb-0">All Feedbacks</h1>
-            <p class="text-muted mb-0">AI-powered sentiment analysis and insights</p>
+            <p class="text-muted mb-0">Manage your feedback collection</p>
         </div>
-        <a th:href="@{/FeedbackForm}" class="btn btn-success btn-lg">➕ Add New Feedback</a>
+        <div>
+            <a th:href="@{/FeedbackForm}" class="btn btn-success btn-lg me-2">➕ Add New Feedback</a>
+            <a th:href="@{/analyzeAll}" class="btn btn-warning btn-lg">🤖 Analyze All Feedbacks</a>
+        </div>
     </div>
 
     <!-- Feedbacks Cards -->
@@ -46,14 +46,6 @@
                             <h5 class="card-title text-secondary mb-2">
                                 Feedback #<span th:text="${feedback.id}">1</span>
                             </h5>
-
-                            <!-- ✅ FIXED Sentiment Badge -->
-                            <span th:if="${feedback.sentiment == 'POSITIVE'}"
-                                  class="badge sentiment-badge bg-success">POSITIVE</span>
-                            <span th:if="${feedback.sentiment == 'NEGATIVE'}"
-                                  class="badge sentiment-badge bg-danger">NEGATIVE</span>
-                            <span th:if="${feedback.sentiment == 'NEUTRAL' or feedback.sentiment == null}"
-                                  class="badge sentiment-badge bg-secondary">NEUTRAL</span>
                         </div>
 
                         <div class="btn-group">
@@ -71,16 +63,7 @@
 
                     <!-- Feedback Text -->
                     <div class="mb-3">
-                        <h6 class="text-muted">Original Feedback:</h6>
                         <p class="card-text" th:text="${feedback.feedback}">Sample feedback</p>
-                    </div>
-
-                    <!-- AI Analysis -->
-                    <div class="alert alert-light border" th:if="${feedback.analysis != null and feedback.analysis != ''}">
-                        <h6 class="alert-heading">
-                            <span class="badge bg-primary">🤖 AI Analysis</span>
-                        </h6>
-                        <p class="mb-0 mt-2" th:text="${feedback.analysis}">Analysis here</p>
                     </div>
                 </div>
             </div>
@@ -90,7 +73,7 @@
         <div class="col-12" th:if="${#lists.isEmpty(Feedbacks)}">
             <div class="text-center py-5">
                 <h3 class="text-muted">No feedbacks yet</h3>
-                <p>Add your first feedback to see AI-powered analysis!</p>
+                <p>Add your first feedback to get started!</p>
                 <a th:href="@{/FeedbackForm}" class="btn btn-primary btn-lg mt-3">➕ Add Your First Feedback</a>
             </div>
         </div>
@@ -98,7 +81,7 @@
 </div>
 
 <footer class="text-center text-muted py-3 mt-5">
-    &copy; 2025 AI Feedback Analyzer | Powered by Google Gemini
+    &copy; 2025 Feedback Analyzer | All Rights Reserved
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
